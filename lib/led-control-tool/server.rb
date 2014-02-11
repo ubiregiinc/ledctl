@@ -59,7 +59,7 @@ module LEDControlTool
 		end
 
 		def initialize(options)
-			@pinno = options[:pinnno]
+			@pinno = options[:pinno]
 			@socket = options[:socket]
 		end
 
