@@ -1,5 +1,6 @@
 require "thor"
 require "socket"
+require "pathname"
 
 require "led-control-tool/server"
 require "led-control-tool/client"
