@@ -130,6 +130,7 @@ module LEDControlTool
 				end
 			ensure
 				unexport!
+				File.unlink(@socket) if File.file?(@socket)
 			end
 		end
 	end
