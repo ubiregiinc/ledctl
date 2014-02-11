@@ -112,6 +112,8 @@ module LEDControlTool
 
 					yield(self) if block_given?
 
+					puts "Server is ready."
+
 					while true
 						socket = server.accept
 
@@ -133,8 +135,9 @@ module LEDControlTool
 					end
 				end
 			ensure
+				off!
 				unexport!
-				File.unlink(@socket) if File.file?(@socket)
+				File.unlink(@socket) if FileTest.socket?(@socket)
 			end
 		end
 	end
