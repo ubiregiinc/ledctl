@@ -92,7 +92,7 @@ module LEDControlTool
 		def run!
 			Thread.start do
 				while true
-					command = current_command
+					command = self.current_command
 					command.tick!(50) if command
 
 					sleep 0.05
@@ -102,7 +102,7 @@ module LEDControlTool
 
 		def start
 			yield(self) if block_given?
-			
+
 			begin
 				export!
 				out!
@@ -122,13 +122,13 @@ module LEDControlTool
 
 						case command.first
 						when "on"
-							current_command = OnCommand.new(self)
+							self.current_command = OnCommand.new(self)
 						when "off"
-							current_command = OffCommand.new(self)
+							self.current_command = OffCommand.new(self)
 						when "blink"
-							current_command = BlinkCommand.new(self, command[1].to_i)
+							self.current_command = BlinkCommand.new(self, command[1].to_i)
 						when "status"
-							socket.puts current_command.status
+							socket.puts self.current_command.status
 						end
 
 						socket.close
