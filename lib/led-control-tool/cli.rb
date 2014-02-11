@@ -28,9 +28,9 @@ module LEDControlTool
 
         case options[:initial]
         when "on"
-          server.current_command = LEDControlTool::Server::OnCommand.new(self)
+          server.current_command = LEDControlTool::Server::OnCommand.new(server)
         when "off"
-          server.current_command = LEDControlTool::Server::OffCommand.new(self)
+          server.current_command = LEDControlTool::Server::OffCommand.new(server)
         end
       end
     end
