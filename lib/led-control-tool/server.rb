@@ -106,7 +106,7 @@ module LEDControlTool
 				UNIXServer.open(@socket) do |server|
 					yield if block_given?
 
-					@queue << OffCommand.new(self)
+					@current_command = OnCommand.new(self)
 
 					while true
 						socket = server.accept
