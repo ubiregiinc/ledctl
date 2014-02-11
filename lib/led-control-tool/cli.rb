@@ -4,7 +4,6 @@ module LEDControlTool
 
     desc "server", "Start LEDControlTool server"
     option :daemon, :type => :boolean, :desc => "Make server run as a Daemon"
-    option :initial, :type => :string, :desc => "Initial command", :default => "on", :banner => "on|off"
     def server(pinno)
     	LEDControlTool::Server.new(:pinno => pinno.to_s, :socket => options[:sock]).start do |server|
         if options[:daemon]
@@ -24,13 +23,6 @@ module LEDControlTool
           at_exit do
             pidfile.unlink if pidfile.file?
           end
-        end
-
-        case options[:initial]
-        when "on"
-          server.current_command = LEDControlTool::Server::OnCommand.new(server)
-        when "off"
-          server.current_command = LEDControlTool::Server::OffCommand.new(server)
         end
       end
     end

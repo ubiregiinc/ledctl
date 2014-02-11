@@ -101,6 +101,8 @@ module LEDControlTool
 		end
 
 		def start
+			yield(self) if block_given?
+			
 			begin
 				export!
 				out!
@@ -109,8 +111,6 @@ module LEDControlTool
 
 				UNIXServer.open(@socket) do |server|
 					File.chmod(0666, @socket)
-
-					yield(self) if block_given?
 
 					puts "Server is ready."
 
