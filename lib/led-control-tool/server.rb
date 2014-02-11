@@ -106,6 +106,8 @@ module LEDControlTool
 				run!
 
 				UNIXServer.open(@socket) do |server|
+					File.chmod(0666, @socket)
+					
 					yield if block_given?
 
 					@current_command = OnCommand.new(self)
