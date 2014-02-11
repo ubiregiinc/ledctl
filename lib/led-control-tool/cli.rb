@@ -30,6 +30,7 @@ module LEDControlTool
     desc "blink", "Blink the LED"
     option :interval, :type => :numeric, :desc => "Specify how fast the LED will flush", :banner => "ms", :default => 1000
     def blink
+      interval = options[:interval]
       LEDControlTool::Client.new(:socket => options[:sock]).send("blink #{interval}")
     end
   end
