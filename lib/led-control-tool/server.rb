@@ -49,7 +49,7 @@ module LEDControlTool
 					end
 
 					@count = 0
-					@on = not @on
+					@on = !@on
 				end
 			end
 
@@ -126,7 +126,7 @@ module LEDControlTool
 						socket.close
 					end
 				end
-			rescue
+			ensure
 				unexport!
 			end
 		end
