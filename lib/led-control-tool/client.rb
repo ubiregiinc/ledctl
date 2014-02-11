@@ -10,7 +10,7 @@ module LEDControlTool
 				line = io.gets
 
 				if line
-					puts line
+					puts line.chomp
 				end
 			end
 		end
