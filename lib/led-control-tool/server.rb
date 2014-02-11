@@ -58,6 +58,8 @@ module LEDControlTool
 			end
 		end
 
+		attr_accessor :current_command
+
 		def initialize(options)
 			@pinno = options[:pinno]
 			@socket = options[:socket]
@@ -90,7 +92,7 @@ module LEDControlTool
 		def run!
 			Thread.start do
 				while true
-					command = @current_command
+					command = current_command
 					command.tick!(50) if command
 
 					sleep 0.05
@@ -107,10 +109,8 @@ module LEDControlTool
 
 				UNIXServer.open(@socket) do |server|
 					File.chmod(0666, @socket)
-					
-					yield if block_given?
 
-					@current_command = OnCommand.new(self)
+					yield(self) if block_given?
 
 					while true
 						socket = server.accept
@@ -120,13 +120,13 @@ module LEDControlTool
 
 						case command.first
 						when "on"
-							@current_command = OnCommand.new(self)
+							current_command = OnCommand.new(self)
 						when "off"
-							@current_command = OffCommand.new(self)
+							current_command = OffCommand.new(self)
 						when "blink"
-							@current_command = BlinkCommand.new(self, command[1].to_i)
+							current_command = BlinkCommand.new(self, command[1].to_i)
 						when "status"
-							socket.puts @current_command.status
+							socket.puts current_command.status
 						end
 
 						socket.close
