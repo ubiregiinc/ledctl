@@ -118,9 +118,9 @@ module LEDControlTool
 						when "off"
 							@current_command = OffCommand.new(self)
 						when "blink"
-							@current_command = BlinkCommand.new(self, command.last.to_i)
+							@current_command = BlinkCommand.new(self, command[1].to_i)
 						when "status"
-							server.puts @current_command.status
+							socket.puts @current_command.status
 						end
 
 						socket.close
