@@ -1,7 +1,7 @@
 module LEDControlTool
 	class Client
-		def initialize(socket: )
-			@socket = socket
+		def initialize(options)
+			@socket = options[:socket]
 		end
 
 		def send(arg)
