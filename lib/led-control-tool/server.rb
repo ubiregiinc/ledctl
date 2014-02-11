@@ -116,6 +116,8 @@ module LEDControlTool
 						socket = server.accept
 
 						command = socket.gets.chomp.split
+						p command
+
 						case command.first
 						when "on"
 							@current_command = OnCommand.new(self)
