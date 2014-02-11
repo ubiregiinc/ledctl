@@ -89,10 +89,12 @@ module LEDControlTool
 
 		def run!
 			Thread.start do
-				command = @current_command
-				command.tick!(100) if command
+				while true
+					command = @current_command
+					command.tick!(50) if command
 
-				sleep 0.1
+					sleep 0.05
+				end
 			end
 		end
 
