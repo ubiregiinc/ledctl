@@ -4,7 +4,6 @@ require "pathname"
 
 require "led-control-tool/server"
 require "led-control-tool/client"
-require "led-control-tool/cli"
 
 class Pathname
 	def write(*args)
