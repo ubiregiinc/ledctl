@@ -2,8 +2,8 @@ require "thor"
 require "socket"
 require "pathname"
 
-require "led-control-tool/server"
-require "led-control-tool/client"
+require "led_control_tool/server"
+require "led_control_tool/client"
 
 class Pathname
 	def write(*args)

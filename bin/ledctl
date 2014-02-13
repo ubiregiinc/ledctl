@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "led-control-tool"
-require "led-control-tool/cli"
+require "led_control_tool"
+require "led_control_tool/cli"
 
 LEDControlTool::CLI.start(ARGV)
