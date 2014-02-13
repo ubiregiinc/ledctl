@@ -101,8 +101,6 @@ module LEDControlTool
 		end
 
 		def start
-			yield(self) if block_given?
-
 			begin
 				export!
 				out!
@@ -113,6 +111,8 @@ module LEDControlTool
 					File.chmod(0666, @socket)
 
 					puts "Server is ready."
+
+					yield(self) if block_given?
 
 					while true
 						socket = server.accept
