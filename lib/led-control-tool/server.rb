@@ -100,8 +100,21 @@ module LEDControlTool
 			end
 		end
 
+		def ensure_socket_deleted
+			st = begin
+				File.lstat(@socket)
+		    rescue Errno::ENOENT
+			    nil
+			end
+			if st && st.socket? && st.owned?
+			    File.unlink @socket
+			end
+		end
+
 		def start
 			begin
+				ensure_socket_deleted
+
 				export!
 				out!
 
@@ -137,7 +150,6 @@ module LEDControlTool
 			ensure
 				off!
 				unexport!
-				File.unlink(@socket) if FileTest.socket?(@socket)
 			end
 		end
 	end
