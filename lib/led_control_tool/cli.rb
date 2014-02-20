@@ -30,11 +30,11 @@ module LEDControlTool
     	LEDControlTool::Server.new(:pinno => pinno.to_s, :socket => options[:sock]).start do |server|
         case options[:initwith]
         when "on"
-          server.current_command = LEDcontrolTool::Server::OnCommand.new(server)
+          server.current_command = LEDControlTool::Server::OnCommand.new(server)
         when "off"
-          server.current_command = LEDcontrolTool::Server::OffCommand.new(server)
+          server.current_command = LEDControlTool::Server::OffCommand.new(server)
         when "blink"
-          server.current_command = LEDcontrolTool::Server::BlinkCommand.new(server, BLINK_INTERVAL)
+          server.current_command = LEDControlTool::Server::BlinkCommand.new(server, BLINK_INTERVAL)
         end
       end
     end
