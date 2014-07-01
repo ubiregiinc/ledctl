@@ -29,6 +29,8 @@ module LEDControlTool
 		end
 
 		class BlinkCommand
+      attr_reader :interval
+
 			def initialize(server, interval)
 				@server = server
 				@interval = interval
@@ -123,25 +125,24 @@ module LEDControlTool
 				UNIXServer.open(@socket) do |server|
 					File.chmod(0666, @socket)
 
-					puts "Server is ready."
-
 					yield(self) if block_given?
 
 					while true
 						socket = server.accept
 
 						command = socket.gets.chomp.split
-						p command
 
 						case command.first
-						when "on"
-							self.current_command = OnCommand.new(self)
-						when "off"
-							self.current_command = OffCommand.new(self)
-						when "blink"
-							self.current_command = BlinkCommand.new(self, command[1].to_i)
-						when "status"
-							socket.puts self.current_command.status
+              when "on"
+                self.current_command = OnCommand.new(self)
+              when "off"
+                self.current_command = OffCommand.new(self)
+              when "blink"
+                self.current_command = BlinkCommand.new(self, command[1].to_i)
+              when "status"
+                socket.puts self.current_command.status
+              when "quit"
+                break
 						end
 
 						socket.close

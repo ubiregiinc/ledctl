@@ -12,4 +12,6 @@ Gem::Specification.new do |s|
   
   s.executables << "ledctl"
   s.add_runtime_dependency 'thor', '~> 0.18', '>= 0.18.1'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rr'
 end
