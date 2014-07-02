@@ -4,15 +4,13 @@ module LEDControlTool
 			@socket = options[:socket]
 		end
 
-		def send(arg)
-			UNIXSocket.open(@socket) do |io|
-				io.puts(arg)
-				line = io.gets
+    def send(arg)
+      UNIXSocket.open(@socket) do |io|
+        io.puts(arg)
+        line = io.gets
 
-				if line
-					puts line.chomp
-				end
-			end
+        line.chomp if line
+      end
     end
 
     def on
