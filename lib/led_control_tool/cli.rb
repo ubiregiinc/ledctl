@@ -21,24 +21,24 @@ module LEDControlTool
 
     desc "status", "Status of the LED under the control of LEDcontrolTool"
     def status
-      puts LEDControlTool::Client.new(:socket => options[:sock]).send("status")
+      puts LEDControlTool::Client.new(:socket => options[:sock]).status
     end
 
     desc "on", "On the LED"
     def on
-      LEDControlTool::Client.new(:socket => options[:sock]).send("on")
+      LEDControlTool::Client.new(:socket => options[:sock]).on
     end
 
     desc "off", "Off the LED"
     def off
-      LEDControlTool::Client.new(:socket => options[:sock]).send("off")
+      LEDControlTool::Client.new(:socket => options[:sock]).off
     end
 
     desc "blink", "Blink the LED"
     option :interval, :type => :numeric, :desc => "Specify how fast the LED will flush", :banner => "ms", :default => BLINK_INTERVAL
     def blink
       interval = options[:interval]
-      LEDControlTool::Client.new(:socket => options[:sock]).send("blink #{interval}")
+      LEDControlTool::Client.new(:socket => options[:sock]).blink(interval)
     end
   end
  end
